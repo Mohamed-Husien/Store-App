@@ -12,6 +12,7 @@ class AllCategorisSerivse {
     try {
       Response response = await API(dio)
           .get(url: 'https://fakestoreapi.com/products/categories');
+
       return response.data;
     } on DioException catch (e) {
       final String errorMessage =

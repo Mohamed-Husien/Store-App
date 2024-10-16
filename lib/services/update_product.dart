@@ -18,7 +18,7 @@ class UpdateProduct {
   }) async {
     try {
       Response response =
-          await API(dio).post(url: 'https://fakestoreapi.com/products', data: {
+          await API(dio).put(url: 'https://fakestoreapi.com/products', data: {
         'title': title,
         'price': price,
         'description': description,

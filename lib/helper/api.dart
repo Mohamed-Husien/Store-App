@@ -32,7 +32,7 @@ class API {
   }
 
   Future<Response> put({required String url, @required dynamic data}) async {
-    Response response = await dio.post(
+    Response response = await dio.put(
       url,
       data: data,
     );

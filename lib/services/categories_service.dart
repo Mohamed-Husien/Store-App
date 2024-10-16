@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -9,13 +10,17 @@ class CategoriesService {
 
   CategoriesService(this.dio);
 
-  Future<ProductModel> getCategoriesProduct(
+  Future<List<ProductModel>> getCategoriesProduct(
       {required String categoryName}) async {
     try {
       Response response = await API(dio)
           .get(url: 'https://fakestoreapi.com/products/category/$categoryName');
-      ProductModel productModel = ProductModel.fromJson(response.data);
-      return productModel;
+      List<dynamic> data = jsonDecode(response.data);
+      List<ProductModel> productList = [];
+      for (int i = 0; i < data.length; i++) {
+        productList.add(ProductModel.fromJson(data[i]));
+      }
+      return productList;
     } on DioException catch (e) {
       final String errorMessage =
           "there is an error with status cod ${e.message.toString()}";
